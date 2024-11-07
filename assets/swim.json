@@ -1,0 +1,196 @@
+[
+  {
+    "id": "location1",
+    "latitude": 37.4884743879741,
+    "longitude": 126.841844660977,
+    "title": "50플러스 수영장",
+    "snippet": "서울특별시 구로구 오류로 36-25 50",
+    "district": "구로구",
+    "weekdayHours": "06:00~21:30",
+    "weekendHours": "토요일 10:00~18:30 / 일요일 및 공휴일 휴관",
+    "rentalAvailable": "불가능",
+    "rentalFee": "운영 프로그램에 따라 이용 요금 상이"
+  },
+
+  {
+    "id": "location2",
+    "latitude": 37.5457741648724,
+    "longitude": 126.974824558285,
+    "title": "갈월종합사회복지관 수영장",
+    "snippet": "서울특별시 용산구 두텁바위로 25",
+    "district": "용산구",
+    "weekdayHours": "09:00~22:00",
+    "weekendHours": "토요일 10:00~18:00 / 일요일 및 공휴일 휴관",
+    "rentalAvailable": "불가능",
+    "rentalFee": "운영 프로그램에 따라 이용 요금 상이"
+
+  },
+
+  {
+    "id": "location3",
+    "latitude": 37.4890010498708,
+    "longitude": 127.105280820161,
+    "title": "강남스포츠문화센터",
+    "snippet": "서울특별시 강남구 밤고개로1길 52",
+    "district": "강남구",
+    "weekdayHours": "06:00~21:50",
+    "weekendHours": "토요일 06:00~17:50, 일요일 09:30~16:00",
+    "rentalAvailable": "가능, 지하2층: 불가능",
+    "rentalFee": "운영 프로그램에 따라 이용 요금 상이"
+  },
+
+  {
+    "id": "location4",
+    "latitude": 37.4941574897199,
+    "longitude": 127.093643339766,
+    "title": "강남주민편익시설",
+    "snippet": "서울특별시 강남구 남부순환로 3318",
+    "district": "강남구",
+    "weekdayHours": "09:00~21:00",
+    "weekendHours": "주말 및 공휴일 휴관",
+    "rentalAvailable": "가능",
+    "rentalFee": "운영 프로그램에 따라 이용 요금 상이"
+  },
+
+  {
+    "id": "location5",
+    "latitude": 37.5497573716985,
+    "longitude": 127.146232700283,
+    "title": "강동청소년회관 수영장",
+    "snippet": "서울특별시 강동구 양재대로138길 41",
+    "district": "강동구",
+    "weekdayHours": "06:00-22:00",
+    "weekendHours": "일요일, 법정공휴일 휴관",
+    "rentalAvailable": "불가능",
+    "rentalFee": "운영 프로그램에 따라 이용 요금 상이"
+  },
+
+  {
+    "id": "location6",
+    "latitude": 37.6409897866256,
+    "longitude": 127.013878144422,
+    "title": "강북문화예술회관 수영장",
+    "snippet": "서울특별시 강북구 삼각산로 85",
+    "district": "강북구",
+    "weekdayHours": "06:00-22:00",
+    "weekendHours": "토요일 06:00~18:00 / 일요일 및 공휴일 휴관",
+    "rentalAvailable": "불가능",
+    "rentalFee": "성인수영 : 34,000~49,000원어린이수영 : 21,000~32,000원아쿠아로빅 : 32,000~50,000원수중보건체조 : 50,000원월이용권 : 28,000~35,000원일일이용권 : 2,000~4,800원"
+  },
+
+  {
+    "id": "location7",
+    "latitude": 37.6304527533868,
+    "longitude": 127.037789370617,
+    "title": "강북웰빙스포츠센터 수영장",
+    "snippet": "서울특별시 강북구 오현로31길 51",
+    "district": "강북구",
+    "weekdayHours": "06:00-22:00",
+    "weekendHours": "토요일 06:00~18:00 / 일요일 및 공휴일 휴관",
+    "rentalAvailable": "가능",
+    "rentalFee": "운영 프로그램 별 이용 요금 상이"
+  },
+
+  {
+    "id": "location8",
+    "latitude": 37.5596698491317,
+    "longitude": 126.850583992337,
+    "title": "강서구민올림픽체육센터 수영장",
+    "snippet": "서울특별시 강서구 화곡로 65길 62",
+    "district": "강서구",
+    "weekdayHours": "06:00-22:00",
+    "weekendHours": "토요일 06:00~16:00 / 일요일 및 공휴일 휴관",
+    "rentalAvailable": "불가능",
+    "rentalFee": "일반수영 : 성인 46,200원 / 청소년 26,400원아쿠아로빅 : 46,200~63,000원자유수영 : 41,700~180,000원유아 및 어린이 소그룹 : 104,000원초급자 특화 : 11,000~156,000원월정기권 : 30,000~56,000원"
+  },
+
+  {
+    "id": "location9",
+    "latitude": 37.5968670281284,
+    "longitude": 127.026238833598,
+    "title": "개운산스포츠센터 수영장",
+    "snippet": "서울특별시 성북구 북악산로 949-60",
+    "district": "성북구",
+    "weekdayHours": "06:00-22:00",
+    "weekendHours": "토요일 06:00~17:50, 일요일 휴관 / 공휴일 10:00~17:50",
+    "rentalAvailable": "가능",
+    "rentalFee": "운영 프로그램에 따라 이용 요금 상이"
+  },
+  {
+    "id": "location10",
+    "latitude": 37.5574405229047,
+    "longitude": 127.16967893433,
+    "title": "고덕어울림수영장",
+    "snippet": "서울특별시 강동구 고덕로 399",
+    "district": "강동구",
+    "weekdayHours": "06:00-22:00",
+    "weekendHours": "토요일 09:00~18:00 / 일요일 및 공휴일 휴관",
+    "rentalAvailable": "가능",
+    "rentalFee": "운영 프로그램에 따라 이용 요금 상이"
+  },
+
+  {
+    "id": "location11",
+    "latitude": 37.4982125677913,
+    "longitude": 126.867088741096,
+    "title": "고척체육센터 수영장",
+    "snippet": "서울특별시 구로구 경인로 430",
+    "district": "구로구",
+    "weekdayHours": "화요일~금요일 09:00~18:00",
+    "weekendHours": "토요일 09:00~18:00 / 월요일, 일요일 및 공휴일 휴무",
+    "rentalAvailable": "불가능",
+    "rentalFee": "운영 프로그램에 따라 이용 요금 상이"
+  },
+
+  {
+    "id": "location12",
+    "latitude": 37.5587828080206,
+    "longitude": 126.810074279462,
+    "title": "공항동문화체육센터 수영장",
+    "snippet": "서울특별시 강서구 송정로 45",
+    "district": "강서구",
+    "weekdayHours": "06:00~21:50",
+    "weekendHours": "토요일 07:00~17:50 / 일요일 및 공휴일 휴관",
+    "rentalAvailable": "불가능",
+    "rentalFee": "아쿠아로빅 : 49,500원일일자유수영 : 1,900~5,500원"
+  },
+
+  {
+    "id": "location13",
+    "latitude": 37.4730673056648,
+    "longitude": 126.960315269279,
+    "title": "관악구민종합체육센터 수영장",
+    "snippet": "서울특별시 양천구 안양천로 939",
+    "district": "양천구",
+    "weekdayHours": "06:00~21:50",
+    "weekendHours": "토요일 시설(헬스, 스쿼시, 수영)에 따라 운영시간 상이 / 일요일은 자유수영만 운영",
+    "rentalAvailable": "불가능",
+    "rentalFee": "아쿠아로빅 : 49,500원일일자유수영 : 1,900~5,500원"
+  },
+
+  {
+    "id": "location14",
+    "latitude": 37.4702439018707,
+    "longitude": 126.935243319909,
+    "title": "관악청소년회관 수영장",
+    "snippet": "서울특별시 관악구 신림로23길 17",
+    "district": "관악구",
+    "weekdayHours": "06:00~21:50",
+    "weekendHours": "토요일 06:00~21:50 / 일요일 및 공휴일 휴관",
+    "rentalAvailable": "불가능",
+    "rentalFee": "아쿠아로빅 : 49,500원일일자유수영 : 1,900~5,500원"
+  },
+
+  {
+    "id": "location15",
+    "latitude": 37.5499660095739,
+    "longitude": 127.122248580466,
+    "title": "광나루한강공원 수영장",
+    "snippet": "서울특별시 강동구 선사로 83-106",
+    "district": "강동구",
+    "weekdayHours": "09:00~19:00",
+    "weekendHours": "09:00~19:00",
+    "rentalAvailable": "불가능",
+    "rentalFee": "어린이 3,000원 / 청소년 4,000원 / 성인 5,000원"
+  }
+]

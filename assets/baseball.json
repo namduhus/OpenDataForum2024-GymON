@@ -1,0 +1,171 @@
+[
+  {
+    "id": "location1",
+    "latitude": 37.567341948015034,
+    "longitude": 127.16469901850407,
+    "title": "고덕유수지야구장",
+    "snippet": "서울특별시 강동구 고덕동 108",
+    "district": "강동구",
+    "weekdayHours": "07:00 - 23:00",
+    "weekendHours": "07:00 - 23:00",
+    "rentalAvailable": "가능",
+    "rentalFee": "(2시간 기준)평일 주간 : 60,500원평일 야간, 주말 및 공휴일 : 78,650원 \n조명사용료 별도"
+  },
+
+
+  {
+    "id": "location2",
+    "latitude": 37.5499660095739,
+    "longitude": 127.122248580466,
+    "title": "광나루한강공원 야구장",
+    "snippet": "서울특별시 강동구 선사로 83-106",
+    "district": "강동구",
+    "weekdayHours": "4월~10월 / 06:00~20:0011월~다음 해 3월 / 07:00~17:00",
+    "weekendHours": "4월~10월 / 06:00~20:0011월~다음 해 3월 / 07:00~17:00",
+    "rentalAvailable": "가능",
+    "rentalFee": "광나루 성인야구장20,000원 / 3시간26,000원 / 3시간 (주말 및 공휴일)"
+  },
+
+  {
+    "id": "location3",
+    "latitude": 37.5628372373648,
+    "longitude": 126.885422860585,
+    "title": "난지한강공원 야구장",
+    "snippet": "서울특별시 마포구 한강난지로 162",
+    "district": "마포구",
+    "weekdayHours": "07:00~19:00",
+    "weekendHours": "07:00~19:00",
+    "rentalAvailable": "가능",
+    "rentalFee": "(3시간 기준) 80,000원"
+  },
+
+  {
+    "id": "location4",
+    "latitude": 37.554014534491,
+    "longitude": 126.896282125379,
+    "title": "망원한강공원 어린이야구장",
+    "snippet": "서울특별시 마포구 마포나루길 435",
+    "district": "마포구",
+    "weekdayHours": "07:00~19:00",
+    "weekendHours": "07:00~19:00",
+    "rentalAvailable": "가능",
+    "rentalFee": "2시간 : 8,000원*월 정기 : 120,000원"
+  },
+
+  {
+    "id": "location5",
+    "latitude": 37.5307279531237,
+    "longitude": 126.879233453873,
+    "title": "목동야구장",
+    "snippet": "서울특별시 양천구 안양천로 939",
+    "district": "양천구",
+    "weekdayHours": "00:00~24:.00",
+    "weekendHours": "00:00~24:.00",
+    "rentalAvailable": "가능",
+    "rentalFee": "행사 종류 및 시간에 따라 대관 요금 상이"
+  },
+
+  {
+    "id": "location6",
+    "latitude": 37.639284629098015,
+    "longitude": 127.08508859957244,
+    "title": "불암산스포츠타운 야구장",
+    "snippet": "서울 노원구 공릉동 141",
+    "district": "노원구",
+    "weekdayHours": "06:00~22:00",
+    "weekendHours": "06:00~22:00",
+    "rentalAvailable": "가능",
+    "rentalFee": "(2시간 기준)평일 : 주간 80,000원 / 야간 104,000원주말 및 공휴일 : 주간 104,000원 / 야간 104,000원"
+  },
+
+  {
+    "id": "location7",
+    "latitude": 37.553976419697,
+    "longitude": 127.050449313495,
+    "title": "살곶이체육공원 야구장",
+    "snippet": "서울특별시 성동구 중랑천서자전거길 209",
+    "district": "성동구",
+    "weekdayHours": "05:00~익일 01:00",
+    "weekendHours": "05:00~익일 01:00",
+    "rentalAvailable": "가능",
+    "rentalFee": "대관사용료 (2시간 30분 기준)평일 : 주간 55,000원, 야간 71,500원주말 및 공휴일 : 71,500원 \n조명탑 사용료 별도"
+  },
+
+  {
+    "id": "location8",
+    "latitude": 37.6100945305971,
+    "longitude": 127.110257980303,
+    "title": "신내차량기지체육시설 야구장",
+    "snippet": "서울특별시 중랑구 용마산로136길 33",
+    "district": "중랑구",
+    "weekdayHours": "07:00~17:00",
+    "weekendHours": "07:00~17:00",
+    "rentalAvailable": "가능",
+    "rentalFee": "중랑구민 : 평일 57,220~286,110원 / 주말 74,380~371,940원 타지역 : 평일 63,580~317,900원 / 주말 82,650~413,270원"
+  },
+
+  {
+    "id": "location9",
+    "latitude": 37.5264887790839,
+    "longitude": 126.832652993272,
+    "title": "신월야구공원",
+    "snippet": "서울특별시 양천구 남부순환로64길 26",
+    "district": "양천구",
+    "weekdayHours": "09:00-21:30",
+    "weekendHours": "",
+    "rentalAvailable": "가능",
+    "rentalFee": "대관 프로그램에 따라 이용 요금 상이"
+  },
+
+  {
+    "id": "location10",
+    "latitude": 37.516734195626,
+    "longitude": 126.878068529219,
+    "title": "안양천체육생태공원 야구장",
+    "snippet": "서울특별시 양천구 신정동 871-4",
+    "district": "양천구",
+    "weekdayHours": "00:00-24:00",
+    "weekendHours": "선착순 예약",
+    "rentalAvailable": "가능",
+    "rentalFee": "무료"
+  },
+
+  {
+    "id": "location11",
+    "latitude": 37.628969360154,
+    "longitude": 127.09784504493,
+    "title": "육사야구장",
+    "snippet": "서울특별시 노원구 공릉동 25-5",
+    "district": "노원구",
+    "weekdayHours": "07:30~19:30",
+    "weekendHours": "07:30~19:30",
+    "rentalAvailable": "가능",
+    "rentalFee": "(2시간 기준)주중 : 114,400원주말 : 148,720원"
+  },
+
+  {
+    "id": "location12",
+    "latitude": 37.5561466519764,
+    "longitude": 127.003659494757,
+    "title": "장충리틀야구장",
+    "snippet": "서울특별시 중구 장충동2가 산 7-55",
+    "district": "중구",
+    "weekdayHours": "09:00~18:00",
+    "weekendHours": "09:00~18:00",
+    "rentalAvailable": "불가능",
+    "rentalFee": "대관 불가"
+  },
+
+  {
+    "id": "location13",
+    "latitude": 37.5031015693302,
+    "longitude": 127.078873314996,
+    "title": "잠실유소년야구장",
+    "snippet": "서울특별시 송파구 잠실본동 306",
+    "district": "송파구",
+    "weekdayHours": "09:00~18:00",
+    "weekendHours": "09:00~18:00",
+    "rentalAvailable": "불가능",
+    "rentalFee": "(1시간 기준)유소년 : 20,000원성인 : 40,000원*주말 이용 시 30% 증액"
+  }
+]

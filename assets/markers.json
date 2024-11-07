@@ -1,0 +1,23 @@
+[
+  {
+    "id": "location1",
+    "latitude": 37.545999,
+    "longitude": 127.10682,
+    "title": "광진구민체육센터",
+    "snippet": "서울특별시 광진구 광장동 313-3"
+  },
+  {
+    "id": "location2",
+    "latitude": 37.567779,
+    "longitude": 127.0848,
+    "title": "중곡문화체육센터",
+    "snippet": "서울특별시 광진구 중곡동 168-8"
+  },
+  {
+    "id": "location3",
+    "latitude": 37.529216,
+    "longitude": 127.07767,
+    "title": "자양체육관",
+    "snippet": "서울특별시 광진구 자양동 594"
+  }
+]

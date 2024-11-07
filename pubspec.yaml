@@ -1,0 +1,37 @@
+name: namduhus_data
+description: "official_data_forum"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: "3.5.4"  # Flutter 2.10.5와 호환되는 Dart SDK 버전 설정
+
+dependencies:
+  flutter:
+    sdk: flutter  # Flutter SDK 버전을 별도로 명시하지 않음
+  http: ^0.13.4          # HTTP 요청 패키지
+  xml2json: ^5.3.1       # XML -> JSON 변환 패키지
+  flutter_map: ^4.0.0    # 지도 표시용 패키지
+  latlong2: ^0.8.1
+  google_maps_flutter: ^2.0.0  # 최신 버전 확인
+  # 지도 좌표용 패키지
+  csv: ^5.0.0
+  geolocator: ^9.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/markers.json
+    - assets/baseball.json
+    - assets/swim.json
+    - assets/soccer.json
+    - assets/badminton.json
+    - assets/basketball.json
+    - assets/tennis.json
+    - assets/1.png
