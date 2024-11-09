@@ -79,6 +79,7 @@ class _SwimPageState extends State<SwimPage> {
     }
   }
 
+  // JSON 파일에서 마커 및 시설 정보 불러오기
   Future<void> _loadMarkersAndData() async {
     final jsonString = await rootBundle.loadString('assets/swim.json');
     final List<dynamic> jsonData = json.decode(jsonString);
@@ -101,7 +102,6 @@ class _SwimPageState extends State<SwimPage> {
       }));
     });
   }
-
   // 대중교통 추천 여부를 묻는 확인창
 // 대중교통 및 기차 추천 여부를 묻는 확인창
   void _showTransportConfirmationDialog(String facilityName) {
@@ -240,6 +240,7 @@ class _SwimPageState extends State<SwimPage> {
     );
   }
 
+  // 수영 강좌 목록 다이얼로그 열기
   Future<void> _showSwimmingClasses() async {
     final swimmingService = SwimmingService();
     final classes = await swimmingService.fetchSwimmingClasses();
@@ -251,8 +252,9 @@ class _SwimPageState extends State<SwimPage> {
         content: Container(
           width: double.maxFinite,
           height: 300,
-          child: ListView.builder(
+          child: ListView.separated(
             itemCount: classes.length,
+            separatorBuilder: (context, index) => Divider(color: Colors.grey),
             itemBuilder: (context, index) {
               final swimClass = classes[index];
               return ListTile(
@@ -267,7 +269,10 @@ class _SwimPageState extends State<SwimPage> {
                     Text("기간: ${swimClass['start']} ~ ${swimClass['end']}"),
                   ],
                 ),
-                onTap: () => _showConsentDialog(swimClass['program']!, true),
+                trailing: ElevatedButton(
+                  onPressed: () => _showConsentDialog(swimClass['program']!, isClassEnrollment: true),
+                  child: Text("신청"),
+                ),
               );
             },
           ),
@@ -282,7 +287,8 @@ class _SwimPageState extends State<SwimPage> {
     );
   }
 
-  void _showConsentDialog(String programName, bool isClassEnrollment) {
+  // 개인정보 동의 체크박스 팝업
+  void _showConsentDialog(String programName, {required bool isClassEnrollment}) {
     setState(() => isChecked = false);
     showDialog(
       context: context,
@@ -306,7 +312,7 @@ class _SwimPageState extends State<SwimPage> {
           ),
           actions: [
             TextButton(
-              onPressed: isChecked ? () => _showFormDialog(programName, isClassEnrollment) : null,
+              onPressed: isChecked ? () => _showFormDialog(programName, isClassEnrollment: isClassEnrollment) : null,
               child: Text("확인"),
             ),
             TextButton(
@@ -319,7 +325,8 @@ class _SwimPageState extends State<SwimPage> {
     );
   }
 
-  void _showFormDialog(String programName, bool isClassEnrollment) {
+  // 예약 또는 장소 이용 신청 폼 다이얼로그
+  void _showFormDialog(String programName, {required bool isClassEnrollment}) {
     Navigator.of(context).pop(); // 개인정보 동의 창 닫기
     TextEditingController nameController = TextEditingController();
     TextEditingController ageController = TextEditingController();
@@ -328,70 +335,73 @@ class _SwimPageState extends State<SwimPage> {
 
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(isClassEnrollment ? "수강생 정보 입력" : "이용자 정보 입력"),
-        content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: nameController,
-                decoration: InputDecoration(labelText: "성명"),
-              ),
-              TextField(
-                controller: ageController,
-                decoration: InputDecoration(labelText: "나이"),
-                keyboardType: TextInputType.number,
-              ),
-              Row(
-                children: [
-                  Text("성별: "),
-                  Radio<String>(
-                    value: '남',
-                    groupValue: gender,
-                    onChanged: (value) {
-                      setState(() {
-                        gender = value!;
-                      });
-                    },
-                  ),
-                  Text("남"),
-                  Radio<String>(
-                    value: '여',
-                    groupValue: gender,
-                    onChanged: (value) {
-                      setState(() {
-                        gender = value!;
-                      });
-                    },
-                  ),
-                  Text("여"),
-                ],
-              ),
-              TextField(
-                controller: locationController,
-                decoration: InputDecoration(labelText: "거주지"),
-              ),
-            ],
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => AlertDialog(
+          title: Text(isClassEnrollment ? "수강생 정보 입력" : "이용자 정보 입력"),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: nameController,
+                  decoration: InputDecoration(labelText: "성명"),
+                ),
+                TextField(
+                  controller: ageController,
+                  decoration: InputDecoration(labelText: "나이"),
+                  keyboardType: TextInputType.number,
+                ),
+                Row(
+                  children: [
+                    Text("성별: "),
+                    Radio<String>(
+                      value: '남',
+                      groupValue: gender,
+                      onChanged: (value) {
+                        setState(() {
+                          gender = value!;
+                        });
+                      },
+                    ),
+                    Text("남"),
+                    Radio<String>(
+                      value: '여',
+                      groupValue: gender,
+                      onChanged: (value) {
+                        setState(() {
+                          gender = value!;
+                        });
+                      },
+                    ),
+                    Text("여"),
+                  ],
+                ),
+                TextField(
+                  controller: locationController,
+                  decoration: InputDecoration(labelText: "거주지"),
+                ),
+              ],
+            ),
           ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // 폼 닫기
+                _showConfirmationDialog(isClassEnrollment);
+              },
+              child: Text("확인"),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text("취소"),
+            ),
+          ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(); // 폼 닫기
-              _showConfirmationDialog(isClassEnrollment);
-            },
-            child: Text("확인"),
-          ),
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text("취소"),
-          ),
-        ],
       ),
     );
   }
 
+  // 신청 완료 확인 다이얼로그
   void _showConfirmationDialog(bool isClassEnrollment) {
     showDialog(
       context: context,
@@ -453,7 +463,7 @@ class _SwimPageState extends State<SwimPage> {
                         ),
                         trailing: facility['rentalAvailable'] == '가능'
                             ? ElevatedButton(
-                          onPressed: () => _showConsentDialog(facility['title'], false),
+                          onPressed: () => _showConsentDialog(facility['title'], isClassEnrollment: false),
                           child: Text("장소이용신청"),
                         )
                             : null,

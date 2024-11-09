@@ -5,7 +5,7 @@ import 'dart:convert';
 
 class BasketballService {
   final String apiUrl =
-      'http://openAPI.seoul.go.kr:8088/API KEY/xml/ListProgramByPublicSportsFacilitiesService/1/50/농구';
+      'http://openAPI.seoul.go.kr:8088/API Key/xml/ListProgramByPublicSportsFacilitiesService/1/50/농구';
 
   Future<List<Map<String, String>>> fetchBasketballClasses() async {
     try {

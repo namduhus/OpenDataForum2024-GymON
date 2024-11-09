@@ -8,8 +8,8 @@ class WeatherService {
     final String baseDate = '${now.year}${now.month.toString().padLeft(2, '0')}${now.day.toString().padLeft(2, '0')}';
     final String baseTime = now.hour.toString().padLeft(2, '0') + '00'; // 정시 기준
 
-    final String apiUrl = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst'
-        '?serviceKey=' // 발급받은 서비스 키
+    final String apiUrl = ''
+        '?serviceKey=API Key' // 발급받은 서비스 키
         '&pageNo=1'
         '&numOfRows=1000'
         '&dataType=XML'

@@ -3,7 +3,7 @@ import 'package:xml2json/xml2json.dart';
 import 'dart:convert';
 
 class LectureService {
-  final String apiUrl = 'https://sports.happysd.or.kr/rest/common/PublicData?serviceTypeCode=1';
+  final String apiUrl = 'API Url';
 
   Future<List<Map<String, String>>> fetchLectureData() async {
     try {

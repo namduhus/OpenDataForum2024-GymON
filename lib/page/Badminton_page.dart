@@ -240,6 +240,7 @@ class _BadmintonPageState extends State<BadmintonPage> {
   }
 
   // 배드민턴 강좌 팝업 창 열기
+  // 배드민턴 강좌 팝업 창 열기
   Future<void> _showBadmintonClasses() async {
     final badmintonService = BadmintonService();
     final classes = await badmintonService.fetchBadmintonClasses();
@@ -251,8 +252,9 @@ class _BadmintonPageState extends State<BadmintonPage> {
         content: Container(
           width: double.maxFinite,
           height: 300,
-          child: ListView.builder(
+          child: ListView.separated(
             itemCount: classes.length,
+            separatorBuilder: (context, index) => Divider(color: Colors.grey), // 각 강좌마다 구분선 추가
             itemBuilder: (context, index) {
               final badmintonClass = classes[index];
               return ListTile(
@@ -268,7 +270,10 @@ class _BadmintonPageState extends State<BadmintonPage> {
                     Text("기간: ${badmintonClass['start']} ~ ${badmintonClass['end']}"),
                   ],
                 ),
-                onTap: () => _showClassConsentDialog(badmintonClass['program']!),
+                trailing: ElevatedButton(
+                  onPressed: () => _showClassConsentDialog(badmintonClass['program']!), // 개인정보 체크 폼으로 이동
+                  child: Text("신청"),
+                ),
               );
             },
           ),

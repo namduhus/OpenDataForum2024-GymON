@@ -3,11 +3,11 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class TransportService {
-  final String apiKey = "";
+  final String apiKey = "API Key";
 
   // 대중교통 정보 가져오기
   Future<List<Map<String, dynamic>>> fetchTransportInfo(String facilityName) async {
-    final url = Uri.parse('http://ws.bus.go.kr/api/rest/pathinfo/getLocationInfo');
+    final url = Uri.parse('');
     final response = await http.get(url.replace(queryParameters: {
       'serviceKey': apiKey,
       'stSrch': facilityName,
@@ -46,13 +46,13 @@ class TransportService {
     final now = DateTime.now();
     final depPlandTime = '${now.year}${now.month.toString().padLeft(2, '0')}${now.day.toString().padLeft(2, '0')}';
 
-    final url = Uri.parse('http://apis.data.go.kr/1613000/TrainInfoService/getStrtpntAlocFndTrainInfo');
+    final url = Uri.parse('');
     final response = await http.get(url.replace(queryParameters: {
       'serviceKey': apiKey,
       'depPlaceId': 'NAT014445',
       'arrPlaceId': 'NAT010000',
       'depPlandTime': depPlandTime,
-      'pageNo': '1',
+      'pageNo': '5',
       'numOfRows': '1',
       '_type': 'xml',
       'trainGradeCode': '00'  // 기차 유형 코드 추가

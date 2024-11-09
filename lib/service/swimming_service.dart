@@ -4,7 +4,7 @@ import 'package:xml2json/xml2json.dart';
 import 'dart:convert';
 
 class SwimmingService {
-  final String apiKey = ''; // API 키를 입력하세요.
+  final String apiKey = 'API Key'; // API 키를 입력하세요.
 
   Future<List<Map<String, String>>> fetchSwimmingClasses() async {
     final apiUrl = 'http://openAPI.seoul.go.kr:8088/$apiKey/xml/ListProgramByPublicSportsFacilitiesService/100/1000/수영';

@@ -79,6 +79,7 @@ class _SoccerPageState extends State<SoccerPage> {
     }
   }
 
+  // JSON 파일에서 마커 및 시설 정보 불러오기
   Future<void> _loadMarkersAndData() async {
     final jsonString = await rootBundle.loadString('assets/soccer.json');
     final List<dynamic> jsonData = json.decode(jsonString);
@@ -101,7 +102,6 @@ class _SoccerPageState extends State<SoccerPage> {
       }));
     });
   }
-
   // 대중교통 추천 여부를 묻는 확인창
 // 대중교통 및 기차 추천 여부를 묻는 확인창
   void _showTransportConfirmationDialog(String facilityName) {
@@ -240,7 +240,7 @@ class _SoccerPageState extends State<SoccerPage> {
     );
   }
 
-  // 축구 강좌 팝업 창 열기
+  // 축구 강좌 목록 다이얼로그 열기
   Future<void> _showSoccerClasses() async {
     final soccerService = SoccerService();
     final classes = await soccerService.fetchSoccerClasses();
@@ -252,8 +252,9 @@ class _SoccerPageState extends State<SoccerPage> {
         content: Container(
           width: double.maxFinite,
           height: 300,
-          child: ListView.builder(
+          child: ListView.separated(
             itemCount: classes.length,
+            separatorBuilder: (context, index) => Divider(color: Colors.grey),
             itemBuilder: (context, index) {
               final soccerClass = classes[index];
               return ListTile(
@@ -269,7 +270,10 @@ class _SoccerPageState extends State<SoccerPage> {
                     Text("기간: ${soccerClass['start']} ~ ${soccerClass['end']}"),
                   ],
                 ),
-                onTap: () => _showConsentDialog(soccerClass['program']!, true),
+                trailing: ElevatedButton(
+                  onPressed: () => _showConsentDialog(soccerClass['program']!, isClassEnrollment: true),
+                  child: Text("신청"),
+                ),
               );
             },
           ),
@@ -285,7 +289,7 @@ class _SoccerPageState extends State<SoccerPage> {
   }
 
   // 개인정보 동의 체크박스 팝업
-  void _showConsentDialog(String programName, bool isClassEnrollment) {
+  void _showConsentDialog(String programName, {required bool isClassEnrollment}) {
     setState(() => isChecked = false);
     showDialog(
       context: context,
@@ -309,9 +313,7 @@ class _SoccerPageState extends State<SoccerPage> {
           ),
           actions: [
             TextButton(
-              onPressed: isChecked
-                  ? () => _showFormDialog(programName, isClassEnrollment)
-                  : null,
+              onPressed: isChecked ? () => _showFormDialog(programName, isClassEnrollment: isClassEnrollment) : null,
               child: Text("확인"),
             ),
             TextButton(
@@ -325,7 +327,7 @@ class _SoccerPageState extends State<SoccerPage> {
   }
 
   // 예약 또는 장소 이용 신청 폼 다이얼로그
-  void _showFormDialog(String programName, bool isClassEnrollment) {
+  void _showFormDialog(String programName, {required bool isClassEnrollment}) {
     Navigator.of(context).pop(); // 개인정보 동의 창 닫기
     TextEditingController nameController = TextEditingController();
     TextEditingController ageController = TextEditingController();
@@ -463,7 +465,7 @@ class _SoccerPageState extends State<SoccerPage> {
                         leading: Icon(Icons.sports_soccer, color: Colors.green),
                         trailing: facility['rentalAvailable'] == '가능'
                             ? ElevatedButton(
-                          onPressed: () => _showConsentDialog(facility['title'], false),
+                          onPressed: () => _showConsentDialog(facility['title'], isClassEnrollment: false),
                           child: Text("장소이용신청"),
                         )
                             : null,

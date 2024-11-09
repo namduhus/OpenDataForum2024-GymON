@@ -3,8 +3,8 @@ import 'package:xml2json/xml2json.dart';
 import 'dart:convert';
 
 class WeatherForecastService {
-  final String apiUrl = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
-      '?serviceKey=' // 발급받은 서비스 키
+  final String apiUrl = ''
+      '?serviceKey=API Key' // 발급받은 서비스 키
       '&pageNo=1'
       '&numOfRows=200'
       '&dataType=XML'

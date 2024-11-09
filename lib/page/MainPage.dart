@@ -27,17 +27,21 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildCurrentWeatherCard(),
-            SizedBox(height: 20),
-            _buildNoticeBoard(),
-            SizedBox(height: 10),
-            _buildSportsBanner(),
-          ],
+      body: SingleChildScrollView( // 화면 스크롤 가능하게 설정
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildCurrentWeatherCard(),
+              SizedBox(height: 20),
+              _buildNoticeBoard(),
+              SizedBox(height: 10),
+              _buildSportsBanner(),
+              SizedBox(height: 20), // 여유 공간 추가
+              _buildReservationStatus(), // 예약 현황 표 추가
+            ],
+          ),
         ),
       ),
     );
@@ -201,4 +205,83 @@ class _MainPageState extends State<MainPage> {
       ),
     );
   }
+}
+Widget _buildReservationStatus() {
+  return Card(
+    elevation: 2,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    child: Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.list, color: Colors.blue, size: 30),
+              SizedBox(width: 8),
+              Text("예약 현황", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            ],
+          ),
+          SizedBox(height: 8),
+          Table(
+            border: TableBorder.all(),
+            columnWidths: const <int, TableColumnWidth>{
+              0: FixedColumnWidth(68),
+              1: FixedColumnWidth(45),
+              2: FixedColumnWidth(45),
+              3: FixedColumnWidth(100),
+              4: FixedColumnWidth(135),
+              5: FixedColumnWidth(130),
+            },
+            children: [
+              TableRow(
+                decoration: BoxDecoration(color: Colors.grey[300]),
+                children: [
+                  _buildTableCell("이름"),
+                  _buildTableCell("나이"),
+                  _buildTableCell("성별"),
+                  _buildTableCell("거주지"),
+                  _buildTableCell("시설예약"),
+                  _buildTableCell("강좌예약"),
+                ],
+              ),
+              // Sample rows - replace with dynamic data as needed
+              TableRow(
+                children: [
+                  _buildTableCell("홍길동"),
+                  _buildTableCell("25"),
+                  _buildTableCell("남자"),
+                  _buildTableCell("김해시 삼안로 207"),
+                  _buildTableCell("봉은 테니스장"),
+                  _buildTableCell(""),
+                ],
+              ),
+              // TableRow(
+              //   children: [
+              //     _buildTableCell("김좌"),
+              //     _buildTableCell("34"),
+              //     _buildTableCell("여자"),
+              //     _buildTableCell("서울시 마포구"),
+              //     _buildTableCell(""),
+              //     _buildTableCell(""),
+              //     _buildTableCell("배드민턴"),
+              //   ],
+              // ),
+            ],
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget _buildTableCell(String text) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Text(
+      text,
+      style: TextStyle(fontSize: 14),
+      textAlign: TextAlign.center,
+    ),
+  );
 }

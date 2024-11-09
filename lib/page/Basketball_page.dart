@@ -26,6 +26,7 @@ class _BasketballPageState extends State<BasketballPage> {
     _loadMarkersAndData();
     _determinePosition();
   }
+
   // 위치 권한 요청 및 현재 위치 가져오기
   Future<void> _determinePosition() async {
     bool serviceEnabled;
@@ -102,7 +103,6 @@ class _BasketballPageState extends State<BasketballPage> {
     });
   }
   // 대중교통 추천 여부를 묻는 확인창
-// 대중교통 및 기차 추천 여부를 묻는 확인창
   void _showTransportConfirmationDialog(String facilityName) {
     showDialog(
       context: context,
@@ -126,7 +126,7 @@ class _BasketballPageState extends State<BasketballPage> {
     );
   }
 
-  // 교통 옵션 선택 팝업
+// 교통 옵션 선택 팝업
   void _showTransportOptions(String facilityName) {
     showDialog(
       context: context,
@@ -153,7 +153,7 @@ class _BasketballPageState extends State<BasketballPage> {
     );
   }
 
-  // 대중교통 추천 팝업
+// 대중교통 추천 팝업
   Future<void> _showTransportRecommendation(String facilityName) async {
     try {
       final transportData = await _transportService.fetchTransportInfo(facilityName);
@@ -186,7 +186,7 @@ class _BasketballPageState extends State<BasketballPage> {
     }
   }
 
-  // 기차 정보 조회
+// 기차 정보 조회
   Future<void> _fetchAndShowTrainInfo() async {
     try {
       final trainData = await _transportService.fetchTrainInfo();
@@ -221,7 +221,6 @@ class _BasketballPageState extends State<BasketballPage> {
       _showErrorDialog("기차 정보를 불러오는 중 오류가 발생했습니다.");
     }
   }
-
   // 오류 다이얼로그
   void _showErrorDialog(String message) {
     showDialog(
@@ -239,7 +238,7 @@ class _BasketballPageState extends State<BasketballPage> {
     );
   }
 
-  // 농구 강좌 팝업 창 열기
+  // 농구 강좌 목록 다이얼로그 열기
   Future<void> _showBasketballClasses() async {
     final basketballService = BasketballService();
     final classes = await basketballService.fetchBasketballClasses();
@@ -251,8 +250,9 @@ class _BasketballPageState extends State<BasketballPage> {
         content: Container(
           width: double.maxFinite,
           height: 300,
-          child: ListView.builder(
+          child: ListView.separated(
             itemCount: classes.length,
+            separatorBuilder: (context, index) => Divider(color: Colors.grey),
             itemBuilder: (context, index) {
               final basketballClass = classes[index];
               return ListTile(
@@ -268,7 +268,10 @@ class _BasketballPageState extends State<BasketballPage> {
                     Text("기간: ${basketballClass['start']} ~ ${basketballClass['end']}"),
                   ],
                 ),
-                onTap: () => _showConsentDialog(basketballClass['program']!, isClassEnrollment: true),
+                trailing: ElevatedButton(
+                  onPressed: () => _showConsentDialog(basketballClass['program']!, isClassEnrollment: true),
+                  child: Text("신청"),
+                ),
               );
             },
           ),
@@ -419,78 +422,77 @@ class _BasketballPageState extends State<BasketballPage> {
     return Scaffold(
       body: Stack(
         children: [
-      Column(
-      children: [
-      Expanded(
-      flex: 2,
-        child: GoogleMap(
-          mapType: MapType.normal,
-          initialCameraPosition: CameraPosition(
-            target: LatLng(37.5665, 126.9780),
-            zoom: 10,
-          ),
-          markers: _markers,
-          onMapCreated: (GoogleMapController controller) {
-            _controller.complete(controller);
-          },
-        ),
-      ),
-      Expanded(
-        flex: 3,
-        child: ListView.builder(
-          padding: EdgeInsets.all(8),
-          itemCount: _facilities.length,
-          itemBuilder: (context, index) {
-            final facility = _facilities[index];
-            return Card(
-              elevation: 3,
-              margin: EdgeInsets.symmetric(vertical: 5),
-              child: ListTile(
-                title: Text(facility['title']),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("자치구: ${facility['district']}"),
-                    Text("운영시간 (평일): ${facility['weekdayHours']}"),
-                    Text("운영시간 (주말): ${facility['weekendHours']}"),
-                    Text("시설대관 여부: ${facility['rentalAvailable']}"),
-                    Text("시설사용료: ${facility['rentalFee']}"),
-                  ],
+          Column(
+            children: [
+              Expanded(
+                flex: 2,
+                child: GoogleMap(
+                  mapType: MapType.normal,
+                  initialCameraPosition: CameraPosition(
+                    target: LatLng(37.5665, 126.9780),
+                    zoom: 10,
+                  ),
+                  markers: _markers,
+                  onMapCreated: (GoogleMapController controller) {
+                    _controller.complete(controller);
+                  },
                 ),
-                leading: Icon(Icons.sports_basketball, color: Colors.brown),
-                trailing: facility['rentalAvailable'] == '가능'
-                    ? ElevatedButton(
-                  onPressed: () => _showConsentDialog(facility['title'], isClassEnrollment: false),
-                  child: Text("장소이용신청"),
-                )
-                    : null,
               ),
-            );
-          },
-        ),
-      ),
-      ],
-    ),
-    Positioned(
-    top: 50,
-    right: 20,
-    child: ElevatedButton(
-    onPressed: _showBasketballClasses,
-    style: ElevatedButton.styleFrom(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-    ),
-      child: Text(
-        '강좌신청',
-        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-      ),
-    ),
-    ),
+              Expanded(
+                flex: 3,
+                child: ListView.builder(
+                  padding: EdgeInsets.all(8),
+                  itemCount: _facilities.length,
+                  itemBuilder: (context, index) {
+                    final facility = _facilities[index];
+                    return Card(
+                      elevation: 3,
+                      margin: EdgeInsets.symmetric(vertical: 5),
+                      child: ListTile(
+                        title: Text(facility['title']),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("자치구: ${facility['district']}"),
+                            Text("운영시간 (평일): ${facility['weekdayHours']}"),
+                            Text("운영시간 (주말): ${facility['weekendHours']}"),
+                            Text("시설대관 여부: ${facility['rentalAvailable']}"),
+                            Text("시설사용료: ${facility['rentalFee']}"),
+                          ],
+                        ),
+                        leading: Icon(Icons.sports_basketball, color: Colors.brown),
+                        trailing: facility['rentalAvailable'] == '가능'
+                            ? ElevatedButton(
+                          onPressed: () => _showConsentDialog(facility['title'], isClassEnrollment: false),
+                          child: Text("장소이용신청"),
+                        )
+                            : null,
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+          Positioned(
+            top: 50,
+            right: 20,
+            child: ElevatedButton(
+              onPressed: _showBasketballClasses,
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: Text(
+                '강좌신청',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 }
-

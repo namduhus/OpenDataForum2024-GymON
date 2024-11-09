@@ -19,6 +19,7 @@ class _TennisPageState extends State<TennisPage> {
   final TransportService _transportService = TransportService();
   bool isChecked = false;
   Position? _currentPosition;
+  Set<String> _favoriteClasses = {}; // 즐겨찾기된 강좌 ID 저장
 
   @override
   void initState() {
@@ -27,18 +28,15 @@ class _TennisPageState extends State<TennisPage> {
     _determinePosition();
   }
 
-  // 위치 권한 요청 및 현재 위치 가져오기
   Future<void> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
 
-    // 위치 서비스 활성화 여부 확인
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       return Future.error('위치 서비스를 활성화하세요.');
     }
 
-    // 위치 권한 확인 및 요청
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
@@ -51,13 +49,11 @@ class _TennisPageState extends State<TennisPage> {
       return Future.error('위치 권한이 영구적으로 거부되었습니다.');
     }
 
-    // 현재 위치 가져오기
     _currentPosition = await Geolocator.getCurrentPosition();
     print("Current Position: $_currentPosition");
     _updateMapLocation();
   }
 
-  // 현재 위치를 지도에 표시하기
   Future<void> _updateMapLocation() async {
     if (_currentPosition != null) {
       final GoogleMapController controller = await _controller.future;
@@ -101,7 +97,6 @@ class _TennisPageState extends State<TennisPage> {
       }));
     });
   }
-
   // 대중교통 추천 여부를 묻는 확인창
 // 대중교통 및 기차 추천 여부를 묻는 확인창
   void _showTransportConfirmationDialog(String facilityName) {
@@ -240,6 +235,17 @@ class _TennisPageState extends State<TennisPage> {
     );
   }
 
+  // 즐겨찾기 상태를 전환하는 함수
+  void _toggleFavorite(String classId) {
+    setState(() {
+      if (_favoriteClasses.contains(classId)) {
+        _favoriteClasses.remove(classId);
+      } else {
+        _favoriteClasses.add(classId);
+      }
+    });
+  }
+
   Future<void> _showTennisClasses() async {
     final tennisService = TennisService();
     final classes = await tennisService.fetchTennisClasses();
@@ -251,24 +257,47 @@ class _TennisPageState extends State<TennisPage> {
         content: Container(
           width: double.maxFinite,
           height: 300,
-          child: ListView.builder(
+          child: ListView.separated(
             itemCount: classes.length,
+            separatorBuilder: (context, index) => Divider(color: Colors.grey),
             itemBuilder: (context, index) {
               final tennisClass = classes[index];
+              final programName = tennisClass['program'] ?? '';
+              final classId = tennisClass['id'] ?? '';
+
               return ListTile(
-                title: Text(tennisClass['program']!),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(programName),
+                    IconButton(
+                      icon: Icon(
+                        _favoriteClasses.contains(classId)
+                            ? Icons.star
+                            : Icons.star_border,
+                        color: _favoriteClasses.contains(classId)
+                            ? Colors.yellow
+                            : Colors.grey,
+                      ),
+                      onPressed: () => _toggleFavorite(classId),
+                    ),
+                  ],
+                ),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("시설명: ${tennisClass['facility']}"),
-                    Text("장소: ${tennisClass['place']}"),
-                    Text("수강료: ${tennisClass['fee']}"),
-                    Text("대상: ${tennisClass['target']}"),
-                    Text("시간: ${tennisClass['time']}"),
-                    Text("기간: ${tennisClass['start']} ~ ${tennisClass['end']}"),
+                    Text("시설명: ${tennisClass['facility'] ?? ''}"),
+                    Text("장소: ${tennisClass['place'] ?? ''}"),
+                    Text("수강료: ${tennisClass['fee'] ?? ''}"),
+                    Text("대상: ${tennisClass['target'] ?? ''}"),
+                    Text("시간: ${tennisClass['time'] ?? ''}"),
+                    Text("기간: ${tennisClass['start'] ?? ''} ~ ${tennisClass['end'] ?? ''}"),
                   ],
                 ),
-                onTap: () => _showConsentDialog(tennisClass['program']!, true),
+                trailing: ElevatedButton(
+                  onPressed: () => _showConsentDialog(programName, isClassEnrollment: true),
+                  child: Text("신청"),
+                ),
               );
             },
           ),
@@ -283,7 +312,7 @@ class _TennisPageState extends State<TennisPage> {
     );
   }
 
-  void _showConsentDialog(String programName, bool isClassEnrollment) {
+  void _showConsentDialog(String programName, {required bool isClassEnrollment}) {
     setState(() => isChecked = false);
     showDialog(
       context: context,
@@ -293,7 +322,7 @@ class _TennisPageState extends State<TennisPage> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text("$programName ${isClassEnrollment ? '프로그램' : '시설'}에 신청하실려면 개인정보 동의가 필요합니다."),
+              Text("$programName 신청하실려면 개인정보 동의가 필요합니다."),
               CheckboxListTile(
                 title: Text("개인정보 수집에 동의합니다."),
                 value: isChecked,
@@ -307,7 +336,9 @@ class _TennisPageState extends State<TennisPage> {
           ),
           actions: [
             TextButton(
-              onPressed: isChecked ? () => _showFormDialog(programName, isClassEnrollment) : null,
+              onPressed: isChecked
+                  ? () => _showFormDialog(programName, isClassEnrollment: isClassEnrollment)
+                  : null,
               child: Text("확인"),
             ),
             TextButton(
@@ -320,8 +351,8 @@ class _TennisPageState extends State<TennisPage> {
     );
   }
 
-  void _showFormDialog(String programName, bool isClassEnrollment) {
-    Navigator.of(context).pop(); // 개인정보 동의 창 닫기
+  void _showFormDialog(String programName, {required bool isClassEnrollment}) {
+    Navigator.of(context).pop();
     TextEditingController nameController = TextEditingController();
     TextEditingController ageController = TextEditingController();
     TextEditingController locationController = TextEditingController();
@@ -380,7 +411,7 @@ class _TennisPageState extends State<TennisPage> {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(); // 폼 닫기
+                Navigator.of(context).pop();
                 _showConfirmationDialog(isClassEnrollment);
               },
               child: Text("확인"),
@@ -456,7 +487,7 @@ class _TennisPageState extends State<TennisPage> {
                         ),
                         trailing: facility['rentalAvailable'] == '가능'
                             ? ElevatedButton(
-                          onPressed: () => _showConsentDialog(facility['title'], false),
+                          onPressed: () => _showConsentDialog(facility['title'], isClassEnrollment: false),
                           child: Text("장소이용신청"),
                         )
                             : null,
